@@ -52,8 +52,8 @@ const Keerthy = () => {
 export default Keerthy;
 
 //App.js
-import React from 'react';
-import Keerthy from './component/Keerthy';
+import React from "react";
+import Keerthy from "./keerthy";
 
 const App = () => {
   return (
@@ -65,3 +65,4 @@ const App = () => {
 };
 
 export default App;
+
