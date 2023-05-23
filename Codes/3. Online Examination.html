@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Examination</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Online Examination</h1>
+
+  <form id="examForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required><br>
+
+    <label for="registerNumber">Register Number:</label>
+    <input type="text" id="registerNumber" required><br>
+
+    <h3>Question 1:</h3>
+    <p>What is the capital of France?</p>
+    <input type="radio" name="q1" value="a"> a) Paris<br>
+    <input type="radio" name="q1" value="b"> b) London<br>
+    <input type="radio" name="q1" value="c"> c) Berlin<br>
+
+    <h3>Question 2:</h3>
+    <p>Which planet is known as the Red Planet?</p>
+    <input type="radio" name="q2" value="a"> a) Mars<br>
+    <input type="radio" name="q2" value="b"> b) Jupiter<br>
+    <input type="radio" name="q2" value="c"> c) Saturn<br>
+
+    <h3>Question 3:</h3>
+    <p>Who painted the Mona Lisa?</p>
+    <input type="radio" name="q3" value="a"> a) Leonardo da Vinci<br>
+    <input type="radio" name="q3" value="b"> b) Pablo Picasso<br>
+    <input type="radio" name="q3" value="c"> c) Vincent van Gogh<br>
+
+    <h3>Question 4:</h3>
+    <p>What is the chemical symbol for gold?</p>
+    <input type="radio" name="q4" value="a"> a) Au<br>
+    <input type="radio" name="q4" value="b"> b) Ag<br>
+    <input type="radio" name="q4" value="c"> c) Fe<br>
+
+    <h3>Question 5:</h3>
+    <p>What is the largest planet in our solar system?</p>
+    <input type="radio" name="q5" value="a"> a) Jupiter<br>
+    <input type="radio" name="q5" value="b"> b) Earth<br>
+    <input type="radio" name="q5" value="c"> c) Venus<br>
+
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("examForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get user input
+      const name = document.getElementById("name").value;
+      const registerNumber = document.getElementById("registerNumber").value;
+
+      // Calculate marks
+      let marks = 0;
+      const answers = {
+        q1: "a",
+        q2: "a",
+        q3: "a",
+        q4: "a",
+        q5: "a"
+      };
+
+      for (let i = 1; i <= 5; i++) {
+        const selectedOption = document.querySelector('input[name="q' + i + '"]:checked');
+        if (selectedOption && selectedOption.value === answers['q' + i]) {
+          marks++;
+        }
+      }
+
+      // Display result
+      const resultContainer = document.getElementById("result");
+      resultContainer.innerHTML = "<h2>Result</h2>";
+      resultContainer.innerHTML += "<p>Name: " + name + "</p>";
+      resultContainer.innerHTML += "<p>Register Number: " + registerNumber + "</p>";
+      resultContainer.innerHTML += "<p>Marks: " + marks + "</p>";
+    });
+  </script>
+</body>
+</html>
