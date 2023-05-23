@@ -1,0 +1,66 @@
+//index.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Resizer</title>
+  <script>
+    function validateUsername() {
+      var username = document.getElementById("username").value;
+
+      // Check if the username has exactly eight characters
+      if (username.length !== 8) {
+        alert("Username must contain eight characters");
+        return;
+      }
+
+      // If validation is successful, display the image resizer page
+      window.location.href = "image_resizer.html";
+    }
+  </script>
+</head>
+<body>
+  <h1>Username Validation</h1>
+  <label for="username">Enter username (8 characters):</label>
+  <input type="text" id="username" maxlength="8" required>
+  <button onclick="validateUsername()">Submit</button>
+</body>
+</html>
+
+
+//image_resizer.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Resizer</title>
+  <script>
+    function resizeImage() {
+      var width = document.getElementById("width").value;
+      var height = document.getElementById("height").value;
+
+      // Check if the width and height are valid numbers
+      if (isNaN(width) || isNaN(height)) {
+        alert("Please enter valid width and height values");
+        return;
+      }
+
+      // Display the resized image
+      var resizedImage = document.getElementById("resizedImage");
+      resizedImage.style.width = width + "px";
+      resizedImage.style.height = height + "px";
+      resizedImage.style.display = "block";
+    }
+  </script>
+</head>
+<body>
+  <h1>Image Resizer</h1>
+  <label for="width">Enter width of the image (in pixels):</label>
+  <input type="text" id="width" required><br><br>
+
+  <label for="height">Enter height of the image (in pixels):</label>
+  <input type="text" id="height" required><br><br>
+
+  <button onclick="resizeImage()">Resize</button><br><br>
+
+  <img src="baby.jpg" id="resizedImage" style="display: none;">
+</body>
+</html>
