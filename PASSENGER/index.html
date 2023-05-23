@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+html>
+<head>
+<title>Passenger Details</title>
+<script>
+function validateForm() {
+var name = document.getElementByld("name").value;
+var age = document.getElementByld("age").value;
+var email = document.getElementEByld("email").value;
+var gender= document.getElementByld("gender").value;
+|/ Validate email
+var emailPattern = /A[^\s@l+@\s@]+\[Ms@]+$/;
+if (lemailPattern.test(email)) {
+alert("Invalid email address!");
+return false;
+|/ Validate age
+if (isNaN(age) || age <1|| age > 100) {
+alert("Invalid age! Age should be a number between 1 and 100.):
+return false;
+/ Validate gender
+if (gender !== "'male" && gender l== "female") {
+alert("Invalid gender! Gender should be either 'male' or female'.");
+return false;
+|| All validations pass
+1/ Further processing (e.g., submitting the form)
+return true;
+</script>
+</head>
+<body>
+<form onsubmit="return validateForm() "'>
+<label for="name">Name:</label>
+<input type="text" id="name" required /><br/><br/>
+<label for="age">Age:</label>
+<input type="text" id="age" required /><br/><br/>
+<label for="email"'>Email:</label>
+<input type="email" id="email" required /><br/><br>
+<label for="gender">Gender:</label>
+<select id="gender" required>
+<option value=""></option>
+<option>
+<option><br /><br />
+value="male>Male</option>
+</form>
+<input type="submit" value="Submit" />
+</body>
+</html>
+value="female">Female</option></select>

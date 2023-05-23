@@ -1,0 +1,306 @@
+Sure! Here's an example of how you can build a Resume Builder web application using React:
+
+1. Set up a new React project using Create React App by running the following command in your terminal:
+```bash
+npx create-react-app resume-builder-app
+```
+
+2. Change directory to the newly created project:
+```bash
+cd resume-builder-app
+```
+
+3. Install the necessary dependencies by running the following command:
+```bash
+npm install react-router-dom
+```
+
+4. Create a new folder called `src/components` and create the following files:
+
+- `src/components/PersonalInfoForm.js`:
+```javascript
+import React, { useState } from 'react';
+
+const PersonalInfoForm = ({ onNext }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onNext({ name, email, phone });
+  };
+
+  return (
+    <div>
+      <h2>Personal Information</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label>
+          Phone:
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </label>
+        <button type="submit">Next</button>
+      </form>
+    </div>
+  );
+};
+
+export default PersonalInfoForm;
+```
+
+- `src/components/EducationForm.js`:
+```javascript
+import React, { useState } from 'react';
+
+const EducationForm = ({ onPrevious, onNext }) => {
+  const [qualification, setQualification] = useState('');
+  const [institute, setInstitute] = useState('');
+  const [year, setYear] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onNext({ qualification, institute, year });
+  };
+
+  return (
+    <div>
+      <h2>Education Details</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Qualification:
+          <input
+            type="text"
+            value={qualification}
+            onChange={(e) => setQualification(e.target.value)}
+          />
+        </label>
+        <label>
+          Institute:
+          <input
+            type="text"
+            value={institute}
+            onChange={(e) => setInstitute(e.target.value)}
+          />
+        </label>
+        <label>
+          Year:
+          <input
+            type="text"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          />
+        </label>
+        <button type="button" onClick={onPrevious}>Previous</button>
+        <button type="submit">Next</button>
+      </form>
+    </div>
+  );
+};
+
+export default EducationForm;
+```
+
+- `src/components/Resume.js`:
+```javascript
+import React from 'react';
+
+const Resume = ({ personalInfo, education }) => {
+  return (
+    <div>
+      <h2>Resume</h2>
+      <h3>Personal Information</h3>
+      <p>Name: {personalInfo.name}</p>
+      <p>Email: {personalInfo.email}</p>
+      <p>Phone: {personalInfo.phone}</p>
+      <h3>Education Details</h3>
+      <ul
+
+>
+        {education.map((edu, index) => (
+          <li key={index}>
+            <p>Qualification: {edu.qualification}</p>
+            <p>Institute: {edu.institute}</p>
+            <p>Year: {edu.year}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default Resume;
+```
+
+5. Open the `src/App.js` file and replace its content with the following code:
+
+```javascript
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import PersonalInfoForm from './components/PersonalInfoForm';
+import EducationForm from './components/EducationForm';
+import Resume from './components/Resume';
+
+const App = () => {
+  const [personalInfo, setPersonalInfo] = useState(null);
+  const [education, setEducation] = useState([]);
+
+  const handlePersonalInfoNext = (data) => {
+    setPersonalInfo(data);
+  };
+
+  const handleEducationPrevious = () => {
+    setPersonalInfo(null);
+  };
+
+  const handleEducationNext = (data) => {
+    setEducation([...education, data]);
+  };
+
+  return (
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Personal Info</Link>
+            </li>
+            <li>
+              <Link to="/education">Education</Link>
+            </li>
+            <li>
+              <Link to="/resume">Resume</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/" exact>
+            <PersonalInfoForm onNext={handlePersonalInfoNext} />
+          </Route>
+          <Route path="/education">
+            <EducationForm
+              onPrevious={handleEducationPrevious}
+              onNext={handleEducationNext}
+            />
+          </Route>
+          <Route path="/resume">
+            <Resume personalInfo={personalInfo} education={education} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
+```
+
+6. Open the `src/App.css` file and add the following CSS code:
+
+```css
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+nav ul li a:hover {
+  background-color: #f2f2f2;
+}
+
+form {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.resume {
+  text-align: left;
+}
+
+.resume h2 {
+  margin-bottom: 20px;
+}
+
+.resume h3 {
+  margin-bottom: 10px;
+}
+
+.resume ul {
+  padding: 0;
+}
+
+.resume li {
+  margin-bottom: 20px;
+}
+```
+
+7. Start the React development server by running the following command:
+```bash
+npm start
+```
+
+8. Open your
+
+ browser and access the app at `http://localhost:3000`. You should see a navigation menu with options for Personal Info, Education, and Resume.
+
+9. Fill in the Personal Info form and click "Next" to proceed to the Education form. Fill in the Education details and click "Next" to view the generated Resume.
+
+10. The Resume section will display the entered Personal Info and Education details.
+
+Feel free to enhance the Resume Builder web application with additional form fields, styling, and functionalities based on your requirements.

@@ -1,0 +1,62 @@
+To design a myNotes logging application and implement the mentioned concepts using Morgan Middleware, you can follow the steps below:
+
+1. Set up a new Node.js project and initialize it with a `package.json` file.
+2. Install the required dependencies, including Express and Morgan, by running the following command in your project directory:
+   ```
+   npm install express morgan
+   ```
+3. Create an `app.js` file and require the necessary modules:
+   ```javascript
+   const express = require('express');
+   const morgan = require('morgan');
+
+   const app = express();
+   ```
+4. Set up the Morgan middleware to handle logging. You can customize the logging format according to your preferences:
+   ```javascript
+   app.use(morgan('dev'));
+   ```
+   The `'dev'` format is a predefined format in Morgan that provides concise output with request method, status code, response time, and more. You can explore other formats provided by Morgan based on your logging requirements.
+5. Set up middleware to parse JSON data from POST submissions:
+   ```javascript
+   app.use(express.json());
+   ```
+6. Define a route to handle POST submissions for creating notes:
+   ```javascript
+   app.post('/notes', (req, res) => {
+     const { title, content } = req.body;
+     
+     // Perform any necessary validations or data processing
+     // ...
+
+     // Log the note creation
+     console.log('Note created:', { title, content });
+
+     // Send a response or perform any other actions as needed
+     res.send('Note created successfully');
+   });
+   ```
+   This example assumes that the request body contains a JSON object with `title` and `content` properties for the note.
+7. Define a route to handle 404 errors for undefined routes:
+   ```javascript
+   app.use((req, res, next) => {
+     res.status(404).send('Page not found');
+   });
+   ```
+   This will send a customized error message with a status code of 404 for any undefined routes.
+8. Start the server and listen on a specific port:
+   ```javascript
+   const port = 3000;
+   app.listen(port, () => {
+     console.log(`Server is running on port ${port}`);
+   });
+   ```
+9. Run the application using Node.js by executing the command:
+   ```
+   node app.js
+   ```
+   You should see the server running on the specified port and logging the requests using Morgan.
+
+With this setup, you can send POST requests to `/notes` with a JSON body containing `title` and `content` properties to create notes. The application will log the note creation using the Morgan middleware. Additionally, for any undefined routes, a customized error message will be sent with a status code of 404.
+
+Please note that this is a basic example, and you can expand upon it based on your specific requirements for the myNotes logging application.

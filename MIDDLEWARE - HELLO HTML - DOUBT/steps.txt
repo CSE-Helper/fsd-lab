@@ -1,0 +1,25 @@
+To serve the `hello.html` file using the static file middleware in Express, you can make the following adjustments to your code:
+
+1. Ensure that the `hello.html` file is located in a directory specified for static file serving. Let's assume the `hello.html` file is located in a directory named `public`. 
+
+2. Modify your Express app to use the static file middleware and specify the `public` directory as the source of static files:
+
+```javascript
+const express = require('express');
+const app = express();
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
+// Start the server
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+```
+
+3. Move the `hello.html` file to the `public` directory.
+
+After making these changes, you should be able to access the `hello.html` file by accessing the application with the file name in the URL, like this: `http://localhost:3000/hello.html`.
+
+The static file middleware will serve the `hello.html` file from the specified directory, treating it the same way it treated the `index.html` file.

@@ -1,0 +1,127 @@
+Sure! Here's an example of how you can implement a React app for searching emojis based on typed text:
+
+1. Set up a new React project using Create React App by running the following command in your terminal:
+```bash
+npx create-react-app emoji-search-app
+```
+
+2. Change directory to the newly created project:
+```bash
+cd emoji-search-app
+```
+
+3. Open the `src/App.js` file and replace its content with the following code:
+
+```javascript
+import React, { useState } from 'react';
+import './App.css';
+
+// Import the emoji JSON data
+import emojiData from './emojiData.json';
+
+function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredEmojis = emojiData.filter((emoji) => {
+    const emojiName = emoji.name.toLowerCase();
+    const searchTermLowerCase = searchTerm.toLowerCase();
+    return emojiName.includes(searchTermLowerCase);
+  });
+
+  return (
+    <div className="App">
+      <h1>Emoji Search</h1>
+      <input
+        type="text"
+        placeholder="Search emojis..."
+        value={searchTerm}
+        onChange={handleInputChange}
+      />
+      <div className="emoji-list">
+        {filteredEmojis.map((emoji) => (
+          <div className="emoji" key={emoji.symbol}>
+            <span>{emoji.symbol}</span>
+            <span>{emoji.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+4. Create a new file called `src/emojiData.json` and paste the following emoji JSON data:
+
+```json
+[
+  {
+    "symbol": "😀",
+    "name": "Grinning Face"
+  },
+  {
+    "symbol": "😃",
+    "name": "Grinning Face with Big Eyes"
+  },
+  {
+    "symbol": "😄",
+    "name": "Grinning Face with Smiling Eyes"
+  },
+  // Add more emojis as needed
+]
+```
+
+5. Open the `src/App.css` file and add the following CSS code:
+
+```css
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.emoji-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.emoji {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  width: 80px;
+}
+
+.emoji span:first-child {
+  font-size: 32px;
+}
+
+.emoji span:last-child {
+  margin-top: 5px;
+}
+```
+
+6. Start the React development server by running the following command:
+```bash
+npm start
+```
+
+7. Open your browser and access the app at `http://localhost:3000`. You should see a search input field and a list of emojis below it.
+
+As you type in the search input field, the app will filter the emojis based on the typed text and display the matching emojis. The emoji search is case-insensitive, so you can type in lowercase or uppercase characters. The filtered emojis will be displayed with their symbols and names.
+
+You can add more emojis to the `emojiData.json` file as needed. The app will dynamically filter and display the emojis based on the search term. Feel free to style the app further or customize it based on your preferences.

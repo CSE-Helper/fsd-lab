@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Username Validation</title>
+    <script>
+        function validateUsername() {
+            var username = document.getElementById("username").value;
+
+            if (username.length !== 8) {
+                alert("Username must contain eight characters.");
+                return;
+            }
+
+            // Open a new page with image and resize functionality
+            var newPage = window.open("", "_blank");
+            newPage.document.write(`
+                <html>
+                <head>
+                    <title>Image Resize</title>
+                    <script>
+                        function resizeImage() {
+                            var width = parseInt(document.getElementById("width").value);
+                            var height = parseInt(document.getElementById("height").value);
+
+                            if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
+                                alert("Please enter valid width and height.");
+                                return;
+                            }
+
+                            // Display the image
+                            var image = new Image();
+                            image.src = "path/to/your/image.jpg";
+                            image.width = width;
+                            image.height = height;
+
+                            var imageContainer = document.getElementById("image-container");
+                            imageContainer.innerHTML = "";
+                            imageContainer.appendChild(image);
+                        }
+                    </script>
+                </head>
+                <body>
+                    <h1>Image Resize</h1>
+                    <div id="image-container"></div>
+                    <label for="width">Width:</label>
+                    <input type="text" id="width"><br><br>
+                    <label for="height">Height:</label>
+                    <input type="text" id="height"><br><br>
+                    <button type="button" onclick="resizeImage()">Resize</button>
+                </body>
+                </html>
+            `);
+        }
+    </script>
+</head>
+<body>
+    <h1>Username Validation</h1>
+    <label for="username">Enter your username (8 characters):</label>
+    <input type="text" id="username" maxlength="8"><br><br>
+    <button type="button" onclick="validateUsername()">Submit</button>
+</body>
+</html>

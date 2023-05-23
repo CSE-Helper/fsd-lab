@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Examination</title>
+    <script>
+        function calculateResult() {
+            // Get the student's name and register number
+            var name = document.getElementById("name").value;
+            var regNumber = document.getElementById("regNumber").value;
+
+            // Calculate the marks
+            var marks = 0;
+
+            // Check the answers
+            var q1Answer = document.getElementById("q1b").checked;
+            var q2Answer = document.getElementById("q2a").checked;
+            var q3Answer = document.getElementById("q3c").checked;
+            var q4Answer = document.getElementById("q4b").checked;
+            var q5Answer = document.getElementById("q5a").checked;
+
+            if (q1Answer) {
+                marks += 1;
+            }
+
+            if (q2Answer) {
+                marks += 1;
+            }
+
+            if (q3Answer) {
+                marks += 1;
+            }
+
+            if (q4Answer) {
+                marks += 1;
+            }
+
+            if (q5Answer) {
+                marks += 1;
+            }
+
+            // Display the result
+            var resultText = "Name: " + name + "<br>";
+            resultText += "Register Number: " + regNumber + "<br>";
+            resultText += "Marks: " + marks + "/5";
+
+            document.getElementById("result").innerHTML = resultText;
+        }
+    </script>
+</head>
+<body>
+    <h1>Online Examination</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+
+        <label for="regNumber">Register Number:</label>
+        <input type="text" id="regNumber" required><br><br>
+
+        <h2>Questions:</h2>
+        <ol>
+            <li>
+                <p>What is the capital of France?</p>
+                <input type="radio" id="q1a" name="q1" value="Paris">Paris<br>
+                <input type="radio" id="q1b" name="q1" value="London">London<br>
+                <input type="radio" id="q1c" name="q1" value="Berlin">Berlin<br>
+            </li>
+            <li>
+                <p>What is the largest planet in our solar system?</p>
+                <input type="radio" id="q2a" name="q2" value="Jupiter">Jupiter<br>
+                <input type="radio" id="q2b" name="q2" value="Mars">Mars<br>
+                <input type="radio" id="q2c" name="q2" value="Saturn">Saturn<br>
+            </li>
+            <li>
+                <p>What is the chemical symbol for gold?</p>
+                <input type="radio" id="q3a" name="q3" value="Ag">Ag<br>
+                <input type="radio" id="q3b" name="q3" value="Au">Au<br>
+                <input type="radio" id="q3c" name="q3" value="Hg">Hg<br>
+            </li>
+            <li>
+                <p>Which of the following is a mammal?</p>
+                <input type="radio" id="q4a" name="q4" value="Eagle">Eagle<br>
+                <input type="radio" id="q4b" name="q4" value="Dolphin">Dolphin<br>
+                <input type="radio" id="q4c" name="q4" value="Salmon">Salmon<br>
+            </li>
+            <li>
+                <p>Who painted the Mona Lisa?</p>
+                <input type="radio" id="q5a" name="q5" value="Leonardo da Vinci">Leonardo da Vinci<br>
+                <input type="radio" id="q5b" name="q5" value="Vincent van Gogh">Vincent van Gogh<br>
+                <input type="radio" id="q5c" name="q5" value="Pablo Picasso">Pablo Picasso<br>
+            </li>
+        </ol>
+        
+        <br>
+        <button type="button" onclick="calculateResult()">Submit</button>
+    </form>
+
+    <div id="result"></div>
+</body>
+</html>

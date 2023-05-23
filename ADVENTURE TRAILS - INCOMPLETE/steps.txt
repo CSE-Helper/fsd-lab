@@ -1,0 +1,52 @@
+To implement routing for the Adventure Trails application as per the provided requirements, you can create a `routes/route.js` file and write the necessary code using Express. Here's an example implementation:
+
+```javascript
+const express = require('express');
+const router = express.Router();
+
+// Route: /packages
+router.get('/packages', (req, res) => {
+  res.status(200).json({ message: "You can now get the requested packages for your request" });
+});
+
+// Route: /bookpackage
+router.post('/bookpackage', (req, res) => {
+  res.status(201).json({ message: "New booking added for the POST request" });
+});
+
+// Route: /all
+router.all('/all', (req, res) => {
+  res.status(404).json({ status: "fail", message: "invalid path" });
+});
+
+module.exports = router;
+```
+
+In this example, the code defines the required routes with their corresponding success and error responses.
+
+- The `/packages` route handles GET requests and responds with a status code of 200 and a JSON object containing the success message.
+- The `/bookpackage` route handles POST requests and responds with a status code of 201 and a JSON object containing the success message.
+- The `/all` route handles all types of requests (GET, POST, etc.) and responds with a status code of 404 and a JSON object containing the error message.
+
+To use this routing file, you need to include it in your main application file (e.g., `app.js`) by requiring it and using it as middleware. Here's an example of how you can do that:
+
+```javascript
+const express = require('express');
+const app = express();
+
+// Require the routes
+const route = require('./routes/route');
+
+// Use the routes middleware
+app.use('/', route);
+
+// Start the server
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+```
+
+Ensure that the `route.js` file is located in a `routes` directory relative to your main application file.
+
+With this setup, you can make requests to the defined routes (`/packages`, `/bookpackage`, `/all`) and receive the appropriate success or error responses based on the requirements.

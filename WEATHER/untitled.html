@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      padding: 5px;
+      width: 200px;
+      font-size: 16px;
+    }
+    button {
+      padding: 5px 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    #weather-info {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weather Application</h1>
+  <form id="location-form">
+    <label for="location-input">Enter Location:</label>
+    <input type="text" id="location-input" required>
+    <button type="submit">Get Weather</button>
+  </form>
+  <div id="weather-info"></div>
+
+  <script>
+    
+
+const locationForm = document.getElementById('location-form');
+const locationInput = document.getElementById('location-input');
+const weatherInfo = document.getElementById('weather-info');
+
+locationForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const location = locationInput.value;
+  getWeather(location);
+});
+
+function getWeather(location) {
+  const apiKey = 'YOUR_API_KEY'; // Replace with your own API key
+  const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      const { name, country, temp_c, condition } = data.current;
+      const weatherDetails = `Location: ${name}, ${country}<br>
+                              Temperature: ${temp_c}°C<br>
+                              Condition: ${condition.text}`;
+      weatherInfo.innerHTML = weatherDetails;
+    })
+    .catch((error) => {
+      console.log('Error:', error);
+      weatherInfo.innerHTML = 'Error retrieving weather data.';
+    });
+}
+
+
+
+  </script>
+</body>
+</html>
