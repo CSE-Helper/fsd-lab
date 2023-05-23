@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ascending Order Validation</title>
+    <script>
+        function validate() {
+            var input = document.getElementById("numberInput").value;
+            
+            // Check if the input is exactly four digits
+            if (input.length !== 4) {
+                alert("Please enter a four-digit number.");
+                return;
+            }
+            
+            // Check if the digits are in ascending order
+            for (var i = 0; i < input.length - 1; i++) {
+                if (parseInt(input[i]) >= parseInt(input[i + 1])) {
+                    alert("Digits must be in ascending order.");
+                    return;
+                }
+            }
+            
+            // If validation passed
+            alert("Validation successful!");
+        }
+    </script>
+</head>
+<body>
+    <h1>Ascending Order Validation</h1>
+    <label for="numberInput">Enter a four-digit number:</label>
+    <input type="text" id="numberInput" maxlength="4">
+    <button onclick="validate()">Validate</button>
+</body>
+</html>
