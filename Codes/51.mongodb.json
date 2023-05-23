@@ -1,0 +1,23 @@
+//mongosh
+//use movies
+
+db.movies.insertMany([
+  {
+    title: "The Hobbit: An Unexpected Journey",
+    synopsis: "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug."
+  },
+  {
+    title: "The Hobbit: The Desolation of Smaug",
+    synopsis: "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring."
+  },
+  {
+    title: "Pulp Fiction",
+    synopsis: "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
+  }
+]);
+
+//db.movies.find({ synopsis: { $regex: "Bilbo", $options: "i" } })
+//db.movies.find({ synopsis: { $regex: "Gandalf", $options: "i" } })
+//db.movies.find({ synopsis: { $regex: "Bilbo", $options: "i" }, synopsis: { $not: /Gandalf/i } })
+//db.movies.find({ $or: [{ synopsis: { $regex: "dwarves", $options: "i" } }, { synopsis: { $regex: "hobbit", $options: "i" } }] })
+//db.movies.find({ synopsis: { $regex: "gold", $options: "i" }, synopsis: { $regex: "dragon", $options: "i" } })
