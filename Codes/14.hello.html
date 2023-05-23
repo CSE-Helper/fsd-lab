@@ -1,0 +1,13 @@
+//npm install express
+//npm filename.js
+
+const express = require('express');
+const app = express();
+
+// serve static files from the public directory
+app.use(express.static('public'));
+
+// start the server
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
