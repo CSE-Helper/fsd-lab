@@ -14,3 +14,7 @@ node filename.js
 
 # Online React Compiler
 https://codesandbox.io/s/react-new
+
+# [FSD Answer pdf 1](http://tinyurl.com/FsAns)
+
+# [FSD Answer pdf 2](http://t.ly/1P0z)
